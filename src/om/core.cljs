@@ -762,8 +762,8 @@
           (when-not refresh-queued
             (set! refresh-queued true)
             (if (exists? js/requestAnimationFrame)
-              (js/requestAnimationFrame render-all)
-              (js/setTimeout render-all 16)))))
+              (js/requestAnimationFrame #(.execUnsafeLocalFunction js/MSApp render-all))
+              (js/setTimeout #(.execUnsafeLocalFunction js/MSApp render-all) 16)))))
       ;; store fn to remove previous root render loop
       (swap! roots assoc target
         (fn []
